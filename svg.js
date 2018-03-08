@@ -5,6 +5,7 @@ var dots = [];
 //clears the screen
 var clearScreen = function(e){
     dots.forEach((a) => a.element.remove());
+    dots = [];
     console.log("Cleared Screen.")
 }
 
@@ -21,18 +22,20 @@ var circle_clicked = function(e){
 
 var makeDot = function(x, y) {
     var cl = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    cl.setAttribute("cx", x);
-    cl.setAttribute("cy", y);
-    cl.setAttribute("r", "15");
-    cl.setAttribute("fill", "red");
-    pic.appendChild(cl);
-    cl.addEventListener('click', circle_clicked);
     return {
         x : x,
         y : y,
+        r : 15,
         fill : "red",
-        stroke : "red",
-        element : cl
+        element : cl,
+        display : function() {
+            cl.setAttribute("cx", this.x);
+            cl.setAttribute("cy", this.y);
+            cl.setAttribute("r", this.r);
+            cl.setAttribute("fill", this.fill);
+            cl.addEventListener('click', circle_clicked);
+            pic.appendChild(cl);
+        }
     };
 }
 
@@ -40,7 +43,9 @@ var makeDot = function(x, y) {
 var svg_clicked = function(e){
     if (e.target == this){  //<-- toElement is undefined
         console.log("coords: ", e.offsetX, ", ", e.offsetY);
-        dots.push(makeDot(e.offsetX,e.offsetY));
+        var dot = makeDot(e.offsetX,e.offsetY);
+        dots.push(dot);
+        dot.display();
     };
 }
 
