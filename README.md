@@ -1,6 +1,6 @@
 # Gum
+Team Gum: Terry Guan, Shakil Rafi
 K #10: Objectification
-
 Due R 2018-03-08, 8:00am, EST.
 
 Refactor last work:
